@@ -10,4 +10,13 @@
   .h1 {
     @apply text-[34px] leading-[42px] font-bold;
   }
+  .body-1 {
+    @apply text-[16px] leading-[24px] font-normal;
+  }
+  .background-section {
+    background-image: url('/assets/images/1737978627948.jpg');
+    background-size: cover;
+    background-position: center;
+  }
+  
 }
