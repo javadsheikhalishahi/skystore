@@ -1,12 +1,12 @@
-import Image from 'next/image';
-import React from 'react';
+import Image from "next/image";
+import React from "react";
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
   return (
-    <div className="flex min-h-screen flex-col md:flex-row relative">
-      {/* Left section with background and content */}
+    <div className="flex min-h-screen flex-col md:flex-row">
+      {/* Left section with background */}
       <section className="p-6 md:p-10 bg-cover bg-center w-full md:w-1/2 background-section relative">
-        {/* Logo positioned in the top-left corner */}
+        {/* Logo */}
         <div className="absolute top-4 left-4">
           <Image
             src="/assets/icons/logo.png"
@@ -17,22 +17,38 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
           />
         </div>
 
-        {/* Content below */}
-        <div className="max-w-md mx-auto md:mx-0 space-y-5 text-center md:text-left text-white mt-24">
-          <h1 className="text-2xl md:text-4xl font-bold pt-20 bg-gradient-to-r from-blue-400 to-green-400 text-transparent bg-clip-text">
+        {/* Content */}
+        <div className="max-w-md mx-auto space-y-5 text-center md:text-left mt-96">
+          <h1
+            className="text-2xl md:text-4xl font-bold"
+            style={{
+              background: "linear-gradient(to right, #56B8FF, #3DD9B3)",
+              WebkitBackgroundClip: "text",
+              color: "transparent",
+            }}
+          >
             Manage your files the best way
           </h1>
-          <p className="text-base font-semibold md:text-lg">
+
+          <p className="text-base font-semibold md:text-lg lg:pt-8 text-zinc-700">
             This is a place where you can store all your documents.
           </p>
         </div>
       </section>
-       
-      <section className='flex flex-1 flex-col items-center justify-center bg-white p-4 py-10 lg:justify-center lg:p-10 lg:py-0'>
-       
+
+      {/* Right section for form */}
+      <section className="flex flex-1 flex-col items-center justify-center bg-white p-6 md:p-10">
+        <div className=" relative ">
+          <Image
+            src="/assets/icons/logo.png"
+            alt="logo"
+            width={120}
+            height={82}
+            className="h-auto lg:hidden"
+          />
+        </div>
+        {children}
       </section>
-      {/* Right section for children */}
-      <main className="flex-1 p-6">{children}</main>
     </div>
   );
 };
