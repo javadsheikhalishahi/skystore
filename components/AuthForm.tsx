@@ -15,27 +15,44 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { toast } from "react-hot-toast";
 import { z } from "zod";
-
-const formSchema = z.object({
-  username: z.string().min(2, "Username must be at least 2 characters").max(50),
-});
 
 type FormType = "sign-in" | "sign-up";
 
+const authFormSchema = (formType: FormType) => {
+  return z.object({
+    email: z.string().email(),
+    fullName:
+      formType === "sign-up"
+        ? z.string().min(4, "fullName must be at least 4 characters").max(50)
+        : z.string().optional(),
+  });
+};
+
 const AuthForm = ({ type }: { type: FormType }) => {
   const [isLoading, setIsLoading] = useState(false);
-  const [errorMessage, setErrorMessage] = useState("");
-
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const formSchema = authFormSchema(type);
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
-    defaultValues: {
-      username: "",
-    },
+    defaultValues:
+      type === "sign-up" ? { fullName: "", email: "" } : { email: "" },
   });
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    console.log(values);
+    setIsLoading(true);
+    setErrorMessage(""); 
+
+    try {
+      console.log("Submitting:", values);
+      await new Promise((resolve) => setTimeout(resolve, 1500));
+      toast.success("Signed in successfully!");
+    } catch (error) {
+      toast.error("Something went wrong.");
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -51,7 +68,7 @@ const AuthForm = ({ type }: { type: FormType }) => {
           {type === "sign-up" && (
             <FormField
               control={form.control}
-              name="fullname"
+              name="fullName"
               render={({ field }) => (
                 <FormItem>
                   <div className="flex flex-col justify-center rounded-xl border border-light-300 px-4 py-2 shadow-drop-1">
@@ -96,7 +113,11 @@ const AuthForm = ({ type }: { type: FormType }) => {
               </FormItem>
             )}
           />
-          <Button type="submit" className="w-full p-5 rounded-2xl" disabled={isLoading}>
+          <Button
+            type="submit"
+            className="w-full p-5 rounded-2xl"
+            disabled={isLoading}
+          >
             {type === "sign-in" ? "Sign In" : "Sign Up"}
 
             {isLoading && (
@@ -110,25 +131,28 @@ const AuthForm = ({ type }: { type: FormType }) => {
             )}
           </Button>
 
-          {errorMessage && 
-            <p className="error-message">*{errorMessage}</p>
-          }
+          {errorMessage && (
+            <p className="text-red-500 text-sm text-center">*{errorMessage}</p>
+          )}
 
           <div className="body-2 flex justify-center">
-            <p className="text-light-100">
+            <p className="text-light-100 underline">
               {type === "sign-in"
                 ? "Don`t have an account?"
-                : "Already have an account?"
-              }
+                : "Already have an account?"}
             </p>
-            <Link 
+            <Link
               href={type === "sign-in" ? "/sign-up" : "/sign-in"}
-              className="ml-1 font-medium text-brand" 
-            > {type === "sign-in" ? "Sign Up" : "Sign In"}</Link>
+              className="ml-1 font-semibold text-blue"
+            >
+              {" "}
+              {type === "sign-in" ? "Sign Up" : "Sign In"}
+            </Link>
           </div>
         </form>
       </Form>
       {/* OTP Verification */}
+      
     </>
   );
 };
