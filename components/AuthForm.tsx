@@ -18,6 +18,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
 import { z } from "zod";
+import OtpModal from "./OTPModal";
 
 type FormType = "sign-in" | "sign-up";
 
@@ -44,23 +45,24 @@ const AuthForm = ({ type }: { type: FormType }) => {
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     setIsLoading(true);
-    setErrorMessage(""); 
+    setErrorMessage("");
 
     try {
-const user = await createAccount({
-      fullName: values.fullName || "",
-      email: values.email,
-    });
+      const user = await createAccount({
+        fullName: values.fullName || "",
+        email: values.email,
+      });
 
-    setAccountId(user.accountId);
-
-    } catch {
-      setErrorMessage("Failed to create account. Please try again.");
+      setAccountId(user.accountId);
+    } catch (error: any) {
+      if (error.message === "Email already in use") {
+        setErrorMessage("This email is already registered. Please use a different email or sign in.");
+      } else {
+        setErrorMessage("Failed to create an account. Please try again.");
+      }
     } finally {
       setIsLoading(false);
     }
-
-    
 
     try {
       console.log("Submitting:", values);
@@ -150,8 +152,11 @@ const user = await createAccount({
           </Button>
 
           {errorMessage && (
-            <p className="text-red-500 text-sm text-center">*{errorMessage}</p>
-          )}
+  <div className="flex items-center gap-2 justify-center  border border-red-400 text-red2 px-4 py-2 rounded-lg text-sm text-center shadow-md">
+    <Image src="/assets/icons/error-svgrepo-com.svg" alt="error" width={24} height={24} />
+    <span>{errorMessage}</span>
+  </div>
+)}
 
           <div className="body-2 flex justify-center">
             <p className="text-light-100 underline">
@@ -170,7 +175,10 @@ const user = await createAccount({
         </form>
       </Form>
       {/* OTP Verification */}
-      
+
+      {accountId && (
+        <OtpModal email={form.getValues("email")} accountId={accountId} />
+      )}
     </>
   );
 };

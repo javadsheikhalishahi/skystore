@@ -19,6 +19,7 @@ const config: Config = {
   				DEFAULT: '#FA7275'
   			},
   			red: '#FF7474',
+			red2:'#ff2828',
   			error: '#b80000',
   			green: '#3DD9B3',
   			blue: '#56B8FF',
@@ -32,7 +33,8 @@ const config: Config = {
   			},
   			dark: {
   				'100': '#04050C',
-  				'200': '#131524'
+  				'200': '#131524',
+				'300': '#0f1228',
   			},
   			background: 'hsl(var(--background))',
   			foreground: 'hsl(var(--foreground))',

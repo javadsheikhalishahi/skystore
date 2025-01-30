@@ -10,11 +10,17 @@
   .h1 {
     @apply text-[34px] leading-[42px] font-bold;
   }
+  .h2 {
+    @apply text-[24px] leading-[36px] font-bold;
+  }
   .body-1 {
     @apply text-[16px] leading-[24px] font-normal;
   }
   .body-2 {
     @apply text-[14px] leading-[20px] font-normal;
+  }
+  .primary-btn {
+    @apply bg-brand hover:bg-brand-100 transition-all rounded-full button !important;
   }
   .shad-no-focus {
     @apply outline-none ring-offset-transparent focus:ring-transparent focus:ring-offset-0 focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-transparent focus-visible:ring-offset-0 !important;
@@ -28,6 +34,32 @@
   .error-message {
     @apply body-2 mx-auto w-fit rounded-xl bg-error/5 px-8 py-4 text-center text-error !important;
   }
+  .shad-alert-dialog {
+    @apply space-y-4 min-w-[320px] max-w-[95%] sm:w-fit rounded-xl 
+           md:rounded-[30px] px-4 md:px-8 py-10 bg-white outline-none !important;
+  }  
+  .close-button-otp {
+    @apply absolute -right-1 -top-6 cursor-pointer sm:-right-2 sm:-top-4  !important;
+  }
+  .sub-2 {
+    @apply text-[14px] leading-[20px] font-semibold;
+  }
+  .otp-shad {
+    @apply w-full flex justify-between gap-[2vw] sm:gap-2 !important;
+  }
+  .otp-slot {
+    @apply text-[32px] md:text-[40px] font-medium rounded-xl 
+           ring-brand shadow-drop-1 text-brand-100 justify-center 
+           flex border-2 border-light-300 w-12 h-12 md:w-16 md:h-16 !important;
+  }
+  .button {
+    @apply text-[14px] leading-[20px] font-medium;
+  }
+  .shad-submit-btns {
+    @apply bg-dark-100 hover:bg-dark-300 transition-all 
+           rounded-full focus:outline-none focus:ring-2 
+           focus:ring-emerald-800 focus:ring-offset-2 !important;
+  }  
   .background-section {
     background-image: url('/assets/images/1737978627948.jpg');
     background-size: cover;
