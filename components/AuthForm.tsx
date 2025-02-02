@@ -10,7 +10,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { createAccount } from "@/lib/actions/user.actions";
+import { createAccount, signInUser } from "@/lib/actions/user.actions";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Image from "next/image";
 import Link from "next/link";
@@ -39,8 +39,10 @@ const AuthForm = ({ type }: { type: FormType }) => {
   const formSchema = authFormSchema(type);
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
-    defaultValues:
-      type === "sign-up" ? { fullName: "", email: "" } : { email: "" },
+    defaultValues: {
+      fullName: "",
+      email: "",
+    },
   });
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
@@ -48,31 +50,41 @@ const AuthForm = ({ type }: { type: FormType }) => {
     setErrorMessage("");
 
     try {
-      const user = await createAccount({
-        fullName: values.fullName || "",
-        email: values.email,
-      });
+      const user =
+        type === "sign-up"
+          ? await createAccount({
+              Name: values.fullName || "",
+              email: values.email,
+            })
+          : await signInUser({ email: values.email });
 
       setAccountId(user.accountId);
     } catch (error: any) {
       if (error.message === "Email already in use") {
         setErrorMessage("This email is already registered. Please use a different email or sign in.");
+      } else if (error.message === "Email not found") {
+        setErrorMessage("No account found with this email. Please sign up.");
       } else {
         setErrorMessage("Failed to create an account. Please try again.");
       }
-    } finally {
+    }finally {
       setIsLoading(false);
     }
 
-    try {
+    try { 
       console.log("Submitting:", values);
-      await new Promise((resolve) => setTimeout(resolve, 1500));
-      toast.success("Signed in successfully!");
+      await new Promise((resolve) => setTimeout(resolve, 2500));
+      toast.success("Signed in successfully!", {
+        icon: "✅",
+      });
     } catch (error) {
-      toast.error("Something went wrong.");
+      toast.error("Something went wrong.", {
+        icon: "❌",
+      });
     } finally {
       setIsLoading(false);
     }
+    
   };
 
   return (
@@ -82,7 +94,7 @@ const AuthForm = ({ type }: { type: FormType }) => {
           onSubmit={form.handleSubmit(onSubmit)}
           className="flex flex-col w-full justify-center transition-all max-w-sm lg:max-w-screen-md space-y-6 mx-auto px-4 sm:px-6 lg:px-8"
         >
-          <h2 className="text-3xl font-bold text-center">
+          <h2 className="text-3xl font-bold text-center pb-5">
             {type === "sign-in" ? "Sign In" : "Sign Up"}
           </h2>
           {type === "sign-up" && (
@@ -135,7 +147,7 @@ const AuthForm = ({ type }: { type: FormType }) => {
           />
           <Button
             type="submit"
-            className="w-full p-5 rounded-2xl"
+            className="w-full p-5 rounded-2xl "
             disabled={isLoading}
           >
             {type === "sign-in" ? "Sign In" : "Sign Up"}
@@ -158,7 +170,7 @@ const AuthForm = ({ type }: { type: FormType }) => {
   </div>
 )}
 
-          <div className="body-2 flex justify-center">
+          <div className="text-[12px] leading-[25px] font-normal flex justify-center">
             <p className="text-light-100 underline">
               {type === "sign-in"
                 ? "Don`t have an account?"
@@ -166,7 +178,7 @@ const AuthForm = ({ type }: { type: FormType }) => {
             </p>
             <Link
               href={type === "sign-in" ? "/sign-up" : "/sign-in"}
-              className="ml-1 font-semibold text-blue"
+              className="ml-1 font-semibold text-blue text-justify"
             >
               {" "}
               {type === "sign-in" ? "Sign Up" : "Sign In"}

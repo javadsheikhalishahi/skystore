@@ -34,36 +34,39 @@ const getUserByEmail = async (email: string) => {
         }
     };
 
-export const createAccount = async ({
-  fullName,
-  email,
-}: {
-  fullName: string;
-  email: string;
-}) => {
-    const existingUser = await getUserByEmail(email);
-
-    const accountId = await sendEmailOTP({ email });
-    if (!accountId) throw new Error("Failed to send an OTP");
-
-    if(!existingUser) {
+    export const createAccount = async ({
+        Name,
+        email,
+      }: {
+        Name: string;
+        email: string;
+      }) => {
+        const existingUser = await getUserByEmail(email);
+      
+        if (existingUser) {
+          throw new Error("Email already in use"); // Early return if user exists
+        }
+      
+        const accountId = await sendEmailOTP({ email });
+        if (!accountId) throw new Error("Failed to send an OTP");
+      
         const { databases } = await createAdminClient();
-
+      
         await databases.createDocument(
-            appwriteConfig.databaseId,
-            appwriteConfig.usersCollectionId,
-            ID.unique(),
-            {
-                fullName,
-                email,
-                avatar: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRBzwZ-pkjd0Jmp-Z6iuxuueVArq8Sbz56pbEDDG3WdholeLBppYn-DgaEHt9sDxC1yqL0&usqp=CAU",
-                accountId,
-            },
+          appwriteConfig.databaseId,
+          appwriteConfig.usersCollectionId,
+          ID.unique(),
+          {
+            Name,
+            email,
+            avatar: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRBzwZ-pkjd0Jmp-Z6iuxuueVArq8Sbz56pbEDDG3WdholeLBppYn-DgaEHt9sDxC1yqL0&usqp=CAU",
+            accountId,
+          }
         );
-    }
-
-    return parseStringify({ accountId });
-};
+      
+        return parseStringify({ accountId });
+      };
+      
 
 export const verifySecret = async ({ accountId, password}: { accountId: string; password: string;}) => {
     try {
@@ -80,6 +83,20 @@ export const verifySecret = async ({ accountId, password}: { accountId: string; 
     } catch (error) {
         handleError(error, "Failed to verify OTP");
     }
-
-     
 };
+
+export const signInUser = async ({ email }: { email: string }) => {
+    try {
+      const existingUser = await getUserByEmail(email);
+  
+      if (!existingUser) {
+        return parseStringify({ accountId: null, error: "Email not found" });
+      }
+  
+      await sendEmailOTP({ email });
+      return parseStringify({ accountId: existingUser.accountId });
+    } catch (error) {
+      handleError(error, "Failed to sign in user");
+    }
+  };
+  
