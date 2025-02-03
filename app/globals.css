@@ -4,7 +4,7 @@
 
 @layer utilities {
   .center {
-    @apply flex h-screen items-center justify-center bg-amber-100;
+    @apply flex h-screen items-center justify-center ;
   }
 
   .h1 {
@@ -97,10 +97,61 @@
     z-index: -1;
 }
 
-  
+.header {
+  @apply flex items-center justify-between gap-5 p-4 sm:p-5 sm:flex lg:py-7 xl:gap-10 !important;
+}
+.header-wrapper {
+  @apply flex items-center justify-center min-w-fit gap-4 !important;
+}
+.sign-out-button {
+  @apply flex items-center justify-center h-12 min-w-12 rounded-s-xl 
+         bg-blue/90 p-0 text-brand shadow-none transition-all 
+         hover:bg-brand/90 duration-300 !important;
+}
+.main-content {
+  @apply remove-scrollbar h-full flex-1 overflow-auto bg-light-200 px-5 py-7 sm:mr-7 sm:rounded-[30px] md:mb-7 md:px-9 md:py-10 !important;
+}
+.sidebar {
+  @apply remove-scrollbar hidden h-screen w-[90px] flex-col overflow-auto px-5 py-7 sm:flex lg:w-[280px] xl:w-[325px] !important;
+}
+.sidebar-nav {
+  @apply text-[16px] leading-[24px] font-semibold mt-9 flex-1 gap-1 text-brand !important;
+}
 }
 
 @layer base {
+  * {
+    @apply scroll-smooth;
+  }
+
+  body {
+    @apply bg-white text-dark-200 min-h-screen;
+  }
+
+  /* Remove scrollbar */
+  .remove-scrollbar::-webkit-scrollbar {
+    width: 0px;
+    height: 0px;
+    border-radius: 0px;
+  }
+
+  .remove-scrollbar::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .remove-scrollbar::-webkit-scrollbar-thumb {
+    background: transparent;
+    border-radius: 0px;
+  }
+
+  .remove-scrollbar::-webkit-scrollbar-thumb:hover {
+    /* background: #1e2238; */
+    background: transparent;
+  }
+
+  .recharts-responsive-container {
+    height: initial !important;
+  }
   :root {
     --background: 0 0% 100%;
     --foreground: 0 0% 3.9%;
