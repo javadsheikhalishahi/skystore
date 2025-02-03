@@ -82,7 +82,6 @@
     position: relative;
     background: none; 
 }
-
 .background-section2::before {
     content: "";
     position: absolute;
@@ -96,7 +95,6 @@
     filter: blur(4); 
     z-index: -1;
 }
-
 .header {
   @apply flex items-center justify-between gap-5 p-4 sm:p-5 sm:flex lg:py-7 xl:gap-10 !important;
 }
@@ -105,7 +103,7 @@
 }
 .sign-out-button {
   @apply flex items-center justify-center h-12 min-w-12 rounded-s-xl 
-         bg-blue/90 p-0 text-brand shadow-none transition-all 
+         bg-blue/30 p-0 text-brand shadow-none transition-all 
          hover:bg-brand/90 duration-300 !important;
 }
 .main-content {
@@ -116,6 +114,24 @@
 }
 .sidebar-nav {
   @apply text-[16px] leading-[24px] font-semibold mt-9 flex-1 gap-1 text-brand !important;
+}
+.sidebar-nav-item {
+  @apply flex text-light-100 gap-4 rounded-xl lg:w-full justify-center lg:justify-start items-center text-[16px] leading-[24px] font-semibold lg:px-[30px] h-[52px] lg:rounded-full hover:scale-105 !important;
+}
+.shad-active {
+  @apply bg-blue text-white shadow-drop-2 !important;
+}
+.nav-icon {
+  @apply w-8 filter invert opacity-80 !important;
+}
+.nav-icon-active {
+  @apply invert-0 opacity-100 hover:scale-125 !important;
+}
+.sidebar-info-user {
+  @apply mt-4 flex items-center justify-center gap-2 rounded-full bg-brand/10 p-1 text-light-100 lg:justify-start lg:p-3 !important;
+}
+.sidebar-user-avatar {
+  @apply aspect-square w-14 rounded-full object-cover !important;
 }
 }
 

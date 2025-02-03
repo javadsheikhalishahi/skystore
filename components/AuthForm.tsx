@@ -53,7 +53,7 @@ const AuthForm = ({ type }: { type: FormType }) => {
       const user =
         type === "sign-up"
           ? await createAccount({
-              Name: values.fullName || "",
+              fullName: values.fullName || "",
               email: values.email,
             })
           : await signInUser({ email: values.email });

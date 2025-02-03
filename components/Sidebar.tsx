@@ -1,11 +1,18 @@
 "use client";
 
 import { navItems } from "@/constants";
+import { cn } from "@/lib/utils";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-const Sidebar = () => {
+interface Props {
+    fullName: string,
+    avatar: string,
+    email: string,
+}
+
+const Sidebar = ({ fullName, avatar, email }: Props) => {
     const pathname = usePathname();
   return (
     <aside className="sidebar">
@@ -29,15 +36,24 @@ const Sidebar = () => {
       <nav className="sidebar-nav">
         <ul className="flex flex-1 flex-col gap-6">
            {navItems.map(({ name, url, icon }) => (
-            <Link key={name} href={url}>
-                <li>
-                    <Image src={icon} alt={name} width={24} height={24}/>
-                    <p>{name}</p>
+            <Link key={name} href={url} className="lg:w-full">
+                <li className={cn("sidebar-nav-item", pathname === url && "shad-active",)}>
+                    <Image src={icon} alt={name} width={24} height={24} className={cn("nav-icon", pathname === url && "nav-icon-active")}/>
+                    <p className="hidden lg:block">{name}</p>
                 </li>
             </Link>
           ))}
         </ul>
       </nav>
+
+      <Image src="/assets/images/bottom-main.png" alt="logo1" width={506} height={418} className="w-full"/>
+      <div className="sidebar-info-user">
+        <Image src={avatar} alt="User-Avatar" width={50} height={50} className="sidebar-user-avatar"/>
+        <div className="hidden lg:block">
+            <p className="text-[14px] leading-[20px] font-semibold capitalize">{fullName}</p>
+            <p className="text-[12px] leading-[15px] font-normal">{email}</p>
+        </div>
+      </div>
     </aside>
   );
 };

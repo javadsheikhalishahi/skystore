@@ -1,8 +1,9 @@
 "use server";
 
+import { avatarPlaceholderUrl } from "@/constants";
 import { cookies } from "next/headers";
 import { ID, Query } from "node-appwrite";
-import { createAdminClient } from "../appwrite";
+import { createAdminClient, createSessionClient } from "../appwrite";
 import { appwriteConfig } from "../appwrite/config";
 import { parseStringify } from "../utils";
 
@@ -35,10 +36,10 @@ const getUserByEmail = async (email: string) => {
     };
 
     export const createAccount = async ({
-        Name,
+        fullName,
         email,
       }: {
-        Name: string;
+        fullName: string;
         email: string;
       }) => {
         const existingUser = await getUserByEmail(email);
@@ -57,9 +58,9 @@ const getUserByEmail = async (email: string) => {
           appwriteConfig.usersCollectionId,
           ID.unique(),
           {
-            Name,
+            fullName,
             email,
-            avatar: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRBzwZ-pkjd0Jmp-Z6iuxuueVArq8Sbz56pbEDDG3WdholeLBppYn-DgaEHt9sDxC1yqL0&usqp=CAU",
+            avatar: avatarPlaceholderUrl,
             accountId,
           }
         );
@@ -100,3 +101,16 @@ export const signInUser = async ({ email }: { email: string }) => {
     }
   };
   
+  export const getCurrentUser = async () => {
+    const { databases, account } = await createSessionClient();
+    const result = await account.get();
+    const user = await databases.listDocuments(
+      appwriteConfig.databaseId,
+      appwriteConfig.usersCollectionId,
+      [Query.equal("accountId", result.$id)],
+    );
+
+    if (user.total <= 0 ) return null;
+
+    return parseStringify(user.documents[0]);
+  }

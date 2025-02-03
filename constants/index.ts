@@ -1,8 +1,10 @@
 export const navItems = [
-    { name: "Dashboard", href: '/', icon: '/assets/icons/home-smile-svgrepo-com.svg', url: "/"},
-    { name: "Documents", href: '/', icon: '/assets/icons/documents-svgrepo-com.svg', url: "/documents"},
-    { name: "Images", href: '/', icon: '/assets/icons/image-svgrepo-com.svg', url: "/images"},
-    { name: "Media", href: '/', icon: '/assets/icons/play-s-svgrepo-com.svg', url: "/media"},
-    { name: "Others", href: '/', icon: '/assets/icons/view-grid-svgrepo-com.svg', url: "/others"},
+    { name: "Dashboard", href: '/', icon: '/assets/icons/home.svg', url: "/"},
+    { name: "Documents", href: '/documents', icon: '/assets/icons/document.svg', url: "/documents"},
+    { name: "Images", href: '/images', icon: '/assets/icons/image.svg', url: "/images"},
+    { name: "Media", href: '/media', icon: '/assets/icons/media.svg', url: "/media"},
+    { name: "Others", href: '/others', icon: '/assets/icons/other.svg', url: "/others"},
     
 ]
+
+export const avatarPlaceholderUrl = "https://img.freepik.com/free-psd/3d-kid-with-costume_23-2151880022.jpg?t=st=1738575838~exp=1738579438~hmac=535e3e3a499d42b9ff84e3f5e6b222ddeb71760e75c8d2b6d8151f88a50a1484&w=826";
