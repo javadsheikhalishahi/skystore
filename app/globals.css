@@ -151,6 +151,18 @@
 .mobile-navbar-item {
   @apply flex text-light-100 gap-4 w-full justify-start items-center text-[16px] leading-[24px] font-semibold px-6 h-[52px] rounded-full hover:scale-105 !important;
 }
+.mobile-sign-out-button {
+  @apply text-[16px] leading-[24px] font-semibold flex h-[52px] w-full items-center gap-4 rounded-full bg-red2/90 px-6 text-black shadow-2xl transition-all hover:ring-2 ring-zinc-950 hover:scale-105 !important;
+}
+.button-uploader {
+  @apply bg-transparent ring-2 rounded-full h-[52px] gap-2 px-10 shadow-drop-2 transition-all duration-1000 !important;
+}
+.preview-uploader-list {
+  @apply fixed bottom-10 right-10 z-50 flex size-full h-fit max-w-[480px] flex-col gap-3 rounded-[20px] bg-white p-7 shadow-drop-3 !important;
+}
+.preview-uploader-item {
+  @apply flex items-center justify-between  gap-3 rounded-xl p-3 shadow-drop-3 !important;
+}
 }
 
 @layer base {

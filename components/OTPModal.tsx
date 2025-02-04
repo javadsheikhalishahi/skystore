@@ -124,7 +124,7 @@ const OtpModal = ({ accountId, email }: { accountId: string; email: string }) =>
               className="h-12 sm:h-14 shad-submit-btns"
               type="button"
             >
-              Submit
+              Verify
               {isLoading && (
                 <Image
                   src="/assets/icons/tube-spinner.svg"

@@ -2,6 +2,7 @@
 
 import { avatarPlaceholderUrl } from "@/constants";
 import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
 import { ID, Query } from "node-appwrite";
 import { createAdminClient, createSessionClient } from "../appwrite";
 import { appwriteConfig } from "../appwrite/config";
@@ -86,6 +87,7 @@ export const verifySecret = async ({ accountId, password}: { accountId: string; 
     }
 };
 
+/*SignInUser*/
 export const signInUser = async ({ email }: { email: string }) => {
     try {
       const existingUser = await getUserByEmail(email);
@@ -113,4 +115,18 @@ export const signInUser = async ({ email }: { email: string }) => {
     if (user.total <= 0 ) return null;
 
     return parseStringify(user.documents[0]);
-  }
+  };
+
+  export const SignOutUser = async () => {
+    const { account } = await createSessionClient();
+
+    try {
+     await account.deleteSession('current');
+      (await cookies()).delete("appwrite-session");
+    } catch(error){
+      handleError(error, "Failed to sign out user");
+    } finally {
+      redirect("/sign-in");
+    }
+  };
+

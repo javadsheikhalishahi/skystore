@@ -7,11 +7,14 @@ import {
   SheetTrigger
 } from "@/components/ui/sheet";
 import { navItems } from "@/constants";
+import { SignOutUser } from "@/lib/actions/user.actions";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
+import FileUploader from "./FileUploader";
+import { Button } from "./ui/button";
 import { Separator } from "./ui/separator";
 
 interface Props {
@@ -56,6 +59,13 @@ const MobileNavigation = ({ ownerId, accountId, fullName, email, avatar}: Props)
         </ul>
       </nav>
       <Separator className="my-5 bg-light-200/10"/>
+      <div className="flex flex-col justify-between gap-5 pb-5">
+       <FileUploader accountId={""} ownerId={""} />
+        <Button type="submit" className="mobile-sign-out-button" aria-label="Sign out" title="Sign out" onClick={async () => await SignOutUser()}>
+                <Image src="/assets/icons/logout-svgrepo-com.svg" alt="logo" width={24} height={24} />
+                <p>Logout</p>
+            </Button>
+      </div>
   </SheetContent>
 </Sheet>
 
