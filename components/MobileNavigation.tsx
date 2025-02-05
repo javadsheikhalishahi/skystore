@@ -4,7 +4,7 @@ import {
   Sheet,
   SheetContent,
   SheetTitle,
-  SheetTrigger
+  SheetTrigger,
 } from "@/components/ui/sheet";
 import { navItems } from "@/constants";
 import { SignOutUser } from "@/lib/actions/user.actions";
@@ -18,59 +18,118 @@ import { Button } from "./ui/button";
 import { Separator } from "./ui/separator";
 
 interface Props {
-  ownerId: string,
-  accountId: string,
-  fullName: string,
-  email: string,
-  avatar: string,
+  $id: string;
+  accountId: string;
+  fullName: string;
+  email: string;
+  avatar: string;
 }
-const MobileNavigation = ({ ownerId, accountId, fullName, email, avatar}: Props) => {
+const MobileNavigation = ({
+  $id: ownerId,
+  accountId,
+  fullName,
+  email,
+  avatar,
+}: Props) => {
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
 
   return (
-   <header className="mobile-header">
-      <Image src="/assets/icons/logo.png" alt="logo-mobile" width={80} height={52} className="h-auto" />
+    <header className="mobile-header">
+      <Image
+        src="/assets/icons/logo.png"
+        alt="logo-mobile"
+        width={80}
+        height={52}
+        className="h-auto"
+      />
       <Sheet open={open} onOpenChange={setOpen}>
-  <SheetTrigger>
-    <Image src="/assets/icons/menu.svg" alt="menu" width={30} height={30}/>
-  </SheetTrigger>
-  <SheetContent className="h-screen px-3 pt-1">
-      <SheetTitle>
-        <div className="header-user-menu"> 
-           <Image src={avatar} alt="avatar" width={44} height={44} className="header-user-avatar-menu"/>
-          <div className="sm:hidden lg:block">
-           <p className="text-[14px] leading-[20px] font-semibold capitalize">{fullName}</p>
-           <p className="text-[12px] leading-[16px] font-normal">{email}</p>
-         </div>
-        </div>
-        <Separator className="mb-4 bg-light-200/40"/>
-      </SheetTitle>
-      <nav className="mobile-navbar">
-        <ul className="mobile-navbar-list">
-        {navItems.map(({ name, url, icon }) => (
-            <Link key={name} href={url} className="lg:w-full">
-                <li className={cn("mobile-navbar-item", pathname === url && "shad-active",)}>
-                    <Image src={icon} alt={name} width={24} height={24} className={cn("nav-icon", pathname === url && "nav-icon-active")}/>
+        <SheetTrigger>
+          <Image
+            src="/assets/icons/menu.svg"
+            alt="menu"
+            width={30}
+            height={30}
+          />
+        </SheetTrigger>
+        <SheetContent className="h-screen px-3 pt-1">
+          <SheetTitle>
+            <div className="header-user-menu">
+              <Image
+                src={avatar}
+                alt="avatar"
+                width={44}
+                height={44}
+                className="header-user-avatar-menu"
+              />
+              <div className="sm:hidden lg:block">
+                <p className="text-[14px] leading-[20px] font-semibold capitalize">
+                  {fullName}
+                </p>
+                <p className="text-[12px] leading-[16px] font-normal">
+                  {email}
+                </p>
+              </div>
+            </div>
+            <Separator className="mb-4 bg-light-200/40" />
+          </SheetTitle>
+          <nav className="mobile-navbar">
+            <ul className="mobile-navbar-list">
+              {navItems.map(({ name, url, icon }) => (
+                <Link key={name} href={url} className="lg:w-full">
+                  <li
+                    className={cn(
+                      "mobile-navbar-item",
+                      pathname === url && "shad-active"
+                    )}
+                  >
+                    <Image
+                      src={icon}
+                      alt={name}
+                      width={24}
+                      height={24}
+                      className={cn(
+                        "nav-icon",
+                        pathname === url && "nav-icon-active"
+                      )}
+                    />
                     <p>{name}</p>
-                </li>
-            </Link>
-          ))}
-        </ul>
-      </nav>
-      <Separator className="my-5 bg-light-200/10"/>
-      <div className="flex flex-col justify-between gap-5 pb-5">
-       <FileUploader accountId={""} ownerId={""} />
-        <Button type="submit" className="mobile-sign-out-button" aria-label="Sign out" title="Sign out" onClick={async () => await SignOutUser()}>
-                <Image src="/assets/icons/logout-svgrepo-com.svg" alt="logo" width={24} height={24} />
-                <p>Logout</p>
+                  </li>
+                </Link>
+              ))}
+            </ul>
+          </nav>
+          <Separator className="my-5 bg-light-200/10" />
+          <div className="flex flex-col justify-between gap-5 pb-5 mt-5">
+            <FileUploader accountId={accountId} ownerId={ownerId} />
+            <div className="flex items-center gap-3 p-3 mt-1 bg-rose-50 border-l-4 border-rose-500 rounded-lg shadow-2xl">
+  <span className="text-xl">⚠️</span>
+  <p className="text-[10px] font-medium">
+    <span className="font-semibold text-rose-600">Note:</span> The maximum file size allowed is 
+    <span className="font-bold"> 50MB</span>. Please compress or reduce the file size if needed before uploading.
+  </p>
+</div>
+
+            <Button
+              type="submit"
+              className="mobile-sign-out-button"
+              aria-label="Sign out"
+              title="Sign out"
+              onClick={async () => await SignOutUser()}
+            >
+              <Image
+                src="/assets/icons/logout-svgrepo-com.svg"
+                alt="logo"
+                width={24}
+                height={24}
+              />
+              <p>Logout</p>
             </Button>
-      </div>
-  </SheetContent>
-</Sheet>
+          </div>
+        </SheetContent>
+      </Sheet>
+    </header>
+  );
+};
 
-   </header>
-  )
-}
-
-export default MobileNavigation
+export default MobileNavigation;

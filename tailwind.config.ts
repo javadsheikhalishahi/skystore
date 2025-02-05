@@ -106,10 +106,15 @@ const config: Config = {
           "75%": { boxShadow: "1 1 5px 1px #00ff00" },
           "100%": { boxShadow: "1 1 5px 1px #ff0000" },
         },
+        "slide-in": {
+          '0%': { opacity: '0', transform: 'translateY(-10px) scale(0.95)' },
+          '100%': { opacity: '1', transform: 'translateY(0) scale(1)' },
+        },
       },
       animation: {
         "caret-blink": "caret-blink 1.25s ease-out infinite",
         "ring-glow": "ring-glow 5s infinite linear",
+        "slide-in": "slide-in 1s ease-out",
       },
     },
   },

@@ -1,7 +1,11 @@
 "use client";
 
+import { MAX_FILE_SIZE } from "@/constants";
+import { useToast } from "@/hooks/use-toast";
+import { uploadFile } from "@/lib/actions/file.action";
 import { cn, convertFileToUrl, getFileType } from "@/lib/utils";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 import React, { useCallback, useState } from "react";
 import { useDropzone } from "react-dropzone";
 import Thumbnail from "./Thumbnail";
@@ -14,12 +18,45 @@ interface Props {
 }
 const FileUploader = ({ accountId, ownerId, className }: Props) => {
   const [files, setFiles] = useState<File[]>([]);
+  const { toast } = useToast();
+  const path = usePathname();
 
   const onDrop = useCallback(async (acceptedFiles: File[]) => {
     setFiles(acceptedFiles);
-  }, []);
-  
-  const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
+    const uploadPromises = acceptedFiles.map(async (file) => {
+      if (file.size > MAX_FILE_SIZE) {
+        setFiles((prevFiles) => prevFiles.filter((f) => f.name !== file.name));
+        return toast({
+          description: (
+            <div className="flex items-center gap-4">
+              <div className="flex items-center justify-center w-10 h-10 bg-rose-600 text-rose-600 rounded-full shadow-xl">
+                ⚠️
+              </div>
+              <p className="text-sm leading-5 font-medium text-gray-900 break-words">
+                <span className="text-yellow-300 font-extrabold">Warning!! <br /></span> 
+                <span className="font-normal text-white underline"> {file.name} </span> 
+                is too large. Max file size is <span className="font-bold">50MB</span> 🤖.
+              </p>
+            </div>
+          ),
+          className: "toast-error",
+        });
+      }
+      return uploadFile({ file, ownerId, accountId, path}).then(
+        (uploadFile) => {
+          if (uploadFile) {
+            setFiles((prevFiles) => 
+              prevFiles.filter((f) => f.name !== file.name),
+          );
+          }
+        },
+      );
+    });
+
+    await Promise.all(uploadPromises);
+  }, [ownerId, accountId, path]);
+
+  const { getRootProps, getInputProps} = useDropzone({ onDrop });
 
   const handleRemoveFile = (
     e: React.MouseEvent<HTMLImageElement, MouseEvent>,
@@ -34,7 +71,7 @@ const FileUploader = ({ accountId, ownerId, className }: Props) => {
       <Button
         type="button"
         className={cn(
-          "button-uploader relative flex items-center gap-3 px-6 py-3 rounded-full transition-all", // Adjust padding for all screens
+          "button-uploader relative flex items-center gap-3 px-6 py-3 rounded-full transition-all", 
           "bg-transparent ring-2 ring-transparent shadow-drop-1",
           "before:absolute before:inset-0 before:rounded-full before:animate-ring-glow",
           "hover:scale-105 hover:shadow-lg",
@@ -97,11 +134,6 @@ const FileUploader = ({ accountId, ownerId, className }: Props) => {
             );
           })}
         </ul>
-      )}
-      {isDragActive ? (
-        <p>Drop the files here ...</p>
-      ) : (
-        <p>Drag 'n' drop some files here, or click to select files</p>
       )}
     </div>
   );

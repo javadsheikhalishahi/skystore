@@ -15,12 +15,12 @@ interface Props {
 const Sidebar = ({ fullName, avatar, email }: Props) => {
     const pathname = usePathname();
   return (
-    <aside className="sidebar">
+    <aside className="sidebar flex flex-col justify-between">
       <Link href="/">
         <Image
           src="/assets/icons/logo.png"
           alt="logo"
-          width={160}
+          width={120}
           height={50}
           className="hidden lg:block h-auto"
         />
@@ -33,7 +33,7 @@ const Sidebar = ({ fullName, avatar, email }: Props) => {
         />
       </Link>
 
-      <nav className="sidebar-nav">
+      <nav className="sidebar-nav mt-9">
         <ul className="flex flex-1 flex-col gap-6">
            {navItems.map(({ name, url, icon }) => (
             <Link key={name} href={url} className="lg:w-full">
@@ -46,7 +46,7 @@ const Sidebar = ({ fullName, avatar, email }: Props) => {
         </ul>
       </nav>
 
-      <Image src="/assets/images/bottom-main.png" alt="logo1" width={506} height={418} className="w-full"/>
+      <Image src="/assets/images/bottom-main.png" alt="logo1" width={506} height={418} className="bottom-image"/>
       <div className="sidebar-info-user">
         <Image src={avatar} alt="User-Avatar" width={50} height={50} className="sidebar-user-avatar"/>
         <div className="hidden lg:block">
