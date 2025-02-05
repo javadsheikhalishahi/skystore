@@ -2,7 +2,7 @@
 
 import { cn, convertFileToUrl, getFileType } from "@/lib/utils";
 import Image from "next/image";
-import { useCallback, useState } from "react";
+import React, { useCallback, useState } from "react";
 import { useDropzone } from "react-dropzone";
 import Thumbnail from "./Thumbnail";
 import { Button } from "./ui/button";
@@ -15,11 +15,19 @@ interface Props {
 const FileUploader = ({ accountId, ownerId, className }: Props) => {
   const [files, setFiles] = useState<File[]>([]);
 
-  const onDrop = useCallback( async(acceptedFiles: File[]) => {
-   setFiles(acceptedFiles);
+  const onDrop = useCallback(async (acceptedFiles: File[]) => {
+    setFiles(acceptedFiles);
   }, []);
+  
   const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
 
+  const handleRemoveFile = (
+    e: React.MouseEvent<HTMLImageElement, MouseEvent>,
+    fileName: string
+  ) => {
+    e.stopPropagation();
+    setFiles((prevFiles) => prevFiles.filter((file) => file.name !== fileName));
+  };
   return (
     <div {...getRootProps()} className="cursor-pointer">
       <input {...getInputProps()} />
@@ -50,23 +58,44 @@ const FileUploader = ({ accountId, ownerId, className }: Props) => {
       </Button>
       {files.length > 0 && (
         <ul className="preview-uploader-list">
-           <h4 className="text-[18px] leading-[20px] font-medium text-light-200 motion-safe:animate-bounce">Uploading</h4>
+          <h4 className="text-[18px] leading-[20px] font-medium text-light-200 motion-safe:animate-bounce">
+            Uploading
+          </h4>
 
-           {files.map((file, index) => {
-             const { type, extension } = getFileType(file.name);
+          {files.map((file, index) => {
+            const { type, extension } = getFileType(file.name);
 
-             return (
-              <li key={`${file.name}-${index}`} className="preview-uploader-item">
+            return (
+              <li
+                key={`${file.name}-${index}`}
+                className="preview-uploader-item"
+              >
                 <div className="flex items-center gap-3">
-                   <Thumbnail 
-                     type={type}
-                     extension={extension}
-                     url={convertFileToUrl(file)}
-                   />
+                  <Thumbnail
+                    type={type}
+                    extension={extension}
+                    url={convertFileToUrl(file)}
+                  />
+                  <div className="item-name-preview">
+                    {file.name}
+                    <Image
+                      src="/assets/icons/loading.gif"
+                      width={80}
+                      height={26}
+                      alt="loading"
+                    />
+                  </div>
                 </div>
+                <Image
+                  src="/assets/icons/remove.svg"
+                  width={24}
+                  height={24}
+                  alt="remove"
+                  onClick={(e) => handleRemoveFile(e, file.name)}
+                />
               </li>
-             )
-           })}
+            );
+          })}
         </ul>
       )}
       {isDragActive ? (

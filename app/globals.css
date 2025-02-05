@@ -163,8 +163,14 @@
 .preview-uploader-item {
   @apply flex items-center justify-between  gap-3 rounded-xl p-3 shadow-drop-3 !important;
 }
+.thumbnail {
+  @apply flex items-center justify-center size-[50px] min-w-[50px] overflow-hidden rounded-full bg-brand/10;
+}
 .image-thumbnail {
-  @apply size-full object-cover object-center !important;
+  @apply size-full object-cover object-center rounded-2xl !important;
+}
+.item-name-preview {
+  @apply text-[14px] leading-[20px] font-semibold mb-2 line-clamp-1 max-w-[300px] !important;
 }
 }
 
