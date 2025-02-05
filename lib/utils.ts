@@ -56,3 +56,11 @@ export const getFileType = (fileName: string) => {
   return { type: "other", extension };
 };
 
+export const getFileIcon = (
+  extension: string | undefined,
+  type: FileType | string,
+) => {
+  switch (extension) {
+    
+  }
+}

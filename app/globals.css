@@ -163,6 +163,9 @@
 .preview-uploader-item {
   @apply flex items-center justify-between  gap-3 rounded-xl p-3 shadow-drop-3 !important;
 }
+.image-thumbnail {
+  @apply size-full object-cover object-center !important;
+}
 }
 
 @layer base {
