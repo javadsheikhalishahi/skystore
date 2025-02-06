@@ -178,6 +178,24 @@
 .toast-error {
   @apply bg-rose-500 !rounded-[15px] p-4 max-w-sm w-fit shadow-2xl flex items-center gap-3 animate-slide-in !important;
 }
+.container-pages {
+  @apply mx-auto flex w-full max-w-7xl flex-col items-center gap-8 !important;
+}
+.section-total-size {
+  @apply flex mt-2 flex-col justify-between sm:flex-row sm:items-center !important;
+}
+.container-sorts {
+  @apply mt-5 flex items-center sm:mt-0 sm:gap-3 !important;
+}
+.empty-list {
+  @apply body-1 mt-10 text-center text-light-200 !important;
+}
+.files-list {
+  @apply grid w-full gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 !important;
+}
+.card-file {
+  @apply flex cursor-pointer flex-col gap-6 rounded-[18px] bg-white p-5 shadow-sm transition-all hover:shadow-drop-3 !important;
+}
 }
 
 @layer base {
