@@ -121,3 +121,18 @@ export const getFileIcon = (
 export const constructFileUrl = (bucketFileId: string) => {
   return `${process.env.NEXT_PUBLIC_APPWRITE_ENDPOINT}/storage/buckets/${process.env.NEXT_PUBLIC_APPWRITE_BUCKET}/file/${bucketFileId}/view?project=${process.env.NEXT_PUBLIC_APPWRITE_PROJECT}`;
 };
+
+export const convertFileSize = (sizeInBytes: number, digits?: number) => {
+  if (sizeInBytes < 1024) {
+    return sizeInBytes + "Bytes";
+  } else if (sizeInBytes < 1024 * 1024) {
+    const sizeInKB = sizeInBytes / 1024;
+    return sizeInKB.toFixed(digits || 1) + " KB ";
+  } else if (sizeInBytes < 1024 * 1024 * 1024) {
+    const sizeInMB = sizeInBytes / (1024 * 1024);
+    return sizeInMB.toFixed(digits || 1) + "MB";
+  } else {
+    const sizeInGB = sizeInBytes / (1024 * 1024 * 1024);
+    return sizeInGB.toFixed(digits || 1) + "GB";
+  }
+};
