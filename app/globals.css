@@ -199,6 +199,12 @@
 .details-card-file {
   @apply flex flex-col gap-2 text-light-100 !important;
 }
+.focus {
+  @apply outline-none ring-offset-transparent focus:ring-transparent focus:ring-offset-0 focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-transparent focus-visible:ring-offset-0 !important;
+}
+.dropdown-item-shad {
+  @apply cursor-pointer !important;
+}
 }
 
 @layer base {
