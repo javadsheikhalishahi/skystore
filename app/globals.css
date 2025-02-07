@@ -205,6 +205,9 @@
 .dropdown-item-shad {
   @apply cursor-pointer !important;
 }
+.shad-dialog button {
+  @apply flex flex-1 focus:ring-0 focus:ring-offset-0 focus-visible:border-none outline-none focus-visible:outline-none focus-visible:ring-transparent focus-visible:ring-offset-0 rounded-3xl !important;
+}
 }
 
 @layer base {

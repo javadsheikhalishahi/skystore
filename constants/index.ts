@@ -54,7 +54,7 @@ export const actionsDropdownItems = [
   },
   {
     label: "Delete",
-    icon: "/assets/icons/delete",
+    icon: "/assets/icons/delete.svg",
     value: "delete",
   },
 ];
