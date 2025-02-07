@@ -26,6 +26,7 @@ export const uploadFile = async ({
         const inputFile = InputFile.fromBuffer(file, file.name);
 
         const bucketFile = await storage.createFile(appwriteConfig.bucketId, ID.unique(), inputFile);
+        
         const fileDocument = {
            type: getFileType(bucketFile.name).type,
            name: bucketFile.name,
