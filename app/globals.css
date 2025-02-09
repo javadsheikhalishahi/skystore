@@ -203,10 +203,16 @@
   @apply outline-none ring-offset-transparent focus:ring-transparent focus:ring-offset-0 focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-transparent focus-visible:ring-offset-0 !important;
 }
 .dropdown-item-shad {
-  @apply cursor-pointer !important;
+  @apply cursor-pointer p-2 rounded-xl transition-all duration-200 hover:bg-gray-200 dark:hover:bg-gray-700 !important;
 }
-.shad-dialog button {
-  @apply flex flex-1 focus:ring-0 focus:ring-offset-0 focus-visible:border-none outline-none focus-visible:outline-none focus-visible:ring-transparent focus-visible:ring-offset-0 rounded-3xl !important;
+.shad-dialog {
+  @apply flex flex-col rounded-3xl  max-w-[90%] sm:max-w-[80%] md:max-w-[60%] lg:max-w-[30%] overflow-visible !important;
+}
+.cancel-button-modals {
+  @apply flex-1 h-[50px] rounded-full bg-white text-light-100 hover:bg-red2 hover:shadow-drop-4 shadow-xl !important;
+}
+.button-submit-modal {
+  @apply bg-black hover:bg-sky-500 transition-all rounded-full button !mx-0 h-[50px] w-full flex-1 shadow-xl hover:shadow-drop-2 !important;
 }
 }
 

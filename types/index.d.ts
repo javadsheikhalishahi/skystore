@@ -17,3 +17,10 @@ declare interface ActionType {
     icon: string;
     value: string;
 }
+
+declare interface RenameFileProps {
+    fileId: string;
+    name: string;
+    extension: string;
+    path: string;
+}

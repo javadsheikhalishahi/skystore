@@ -19,7 +19,7 @@ const Card = ({ file }: { file: Models.Document }) => {
 
         <div className="flex flex-col items-end justify-between">
             <ActionDropdown file={file} />
-            <p className="text-[16px] leading-[24px] font-normal">{convertFileSize(file.size)}</p>
+            <p className="text-[14px] leading-[24px] font-normal">{convertFileSize(file.size)}</p>
         </div>
       </div>
 
@@ -28,7 +28,7 @@ const Card = ({ file }: { file: Models.Document }) => {
          {file.name}
         </p>
         <FormattedDateTime date={file.$createdAt} className="text-[14px] leading-[20px] font-normal text-light-100" />
-        <p className="text-[12px] leading-[16px] font-normal line-clamp-1 text-light-200">By: {file.owner.fullName}</p>
+        <p className="text-[12px] leading-[16px] font-normal line-clamp-1 text-gray-400">By : {file.owner.fullName}</p>
       </div>
     </Link>
   );
