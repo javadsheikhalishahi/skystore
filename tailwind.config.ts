@@ -85,6 +85,7 @@ const config: Config = {
         "drop-2": "0 8px 30px 0 rgba(65, 89, 214, 0.4)",
         "drop-3": "0 8px 30px 0 rgba(65, 89, 214, 0.1)",
         "drop-4": "0 8px 30px 0 rgba(214, 65, 65, 0.4)",
+        "drop-5": "0 8px 30px 0 rgba(65, 89, 214, 0.35)",
       },
       borderRadius: {
         lg: "var(--radius)",
