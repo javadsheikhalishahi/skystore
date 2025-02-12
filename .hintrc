@@ -9,6 +9,12 @@
       {
         "label": "off"
       }
+    ],
+    "axe/structure": [
+      "default",
+      {
+        "list": "off"
+      }
     ]
   }
 }

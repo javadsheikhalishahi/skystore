@@ -167,7 +167,7 @@
   @apply flex items-center justify-between  gap-3 rounded-xl p-3 shadow-drop-3 !important;
 }
 .thumbnail {
-  @apply flex items-center justify-center size-[50px] min-w-[50px] overflow-hidden rounded-full bg-brand/10;
+  @apply flex items-center justify-center size-[50px] min-w-[50px] overflow-hidden rounded-full bg-sky-600/10;
 }
 .image-thumbnail {
   @apply size-full object-cover object-center rounded-2xl !important;
@@ -194,7 +194,7 @@
   @apply grid w-full gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 !important;
 }
 .card-file {
-  @apply flex cursor-pointer flex-col gap-6 rounded-[18px] bg-white p-5 shadow-sm transition-all hover:shadow-drop-3 !important;
+  @apply flex cursor-pointer flex-col gap-6 rounded-[18px] bg-white p-5 shadow-2xl transition-all hover:shadow-drop-6 !important;
 }
 .details-card-file {
   @apply flex flex-col gap-2 text-light-100 !important;
@@ -203,7 +203,7 @@
   @apply outline-none ring-offset-transparent focus:ring-transparent focus:ring-offset-0 focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-transparent focus-visible:ring-offset-0 !important;
 }
 .dropdown-item-shad {
-  @apply cursor-pointer p-2 w-40 rounded-xl transition-all duration-200 hover:bg-gray-200 dark:hover:bg-gray-700 !important;
+  @apply cursor-pointer p-2 w-52 rounded-xl transition-all duration-200 hover:bg-gray-200 dark:hover:bg-gray-700 !important;
 }
 .shad-dialog {
   @apply flex flex-col rounded-3xl  max-w-[90%] sm:max-w-[80%] md:max-w-[60%] lg:max-w-[30%] overflow-visible !important;
@@ -222,6 +222,33 @@
 }
 .details-value {
   @apply text-[14px] leading-[20px] font-bold flex-1 !important;
+}
+ .share-wrapper {
+    @apply !mt-2 space-y-2 !important;
+}
+ .input-field-share {
+    @apply body-2 shad-no-focus h-[52px] w-full rounded-xl border px-4 shadow-drop-1 !important;
+}
+.remove-icon {
+  @apply aspect-square rounded-full !important;
+}
+.remove-user-share {
+  @apply rounded-full bg-transparent text-light-100 shadow-none hover:bg-transparent !important;
+}
+.search {
+  @apply relative w-full md:max-w-[480px] !important;
+}
+.input-search-wrapper {
+  @apply flex h-[52px] flex-1 border-2 items-center gap-3 rounded-full px-4 hover:scale-105 shadow-drop-3 !important;
+}
+.input-search {
+  @apply body-2 shad-no-focus  placeholder:body-1 w-full border-none p-0 shadow-none  placeholder:text-light-200 !important;
+}
+.search-result {
+  @apply absolute left-0 top-16 z-50 flex w-full flex-col gap-3 rounded-[20px] bg-white p-4 !important;
+}
+.result-empty {
+  @apply body-2 text-center text-light-100 !important;
 }
 }
 

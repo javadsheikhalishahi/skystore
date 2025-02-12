@@ -26,8 +26,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Models } from "node-appwrite";
 import { useState } from "react";
-import { FileDetails } from "./ActionsModalContent";
-import ShareInput from "./ShareInput";
+import { FileDetails, ShareInput } from "./ActionsModalContent";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 
@@ -66,8 +65,17 @@ const ActionDropdown = ({ file }: { file: Models.Document }) => {
     setIsLoading(false);
   };
 
-  const handleRemoverUser = () => {
+  const handleRemoverUser = async (email: string) => {
+     const updatedEmails = emails.filter((e) => e !== email)
+     
+     const success = await updateFileUsers({
+      fileId: file.$id,
+      emails: updatedEmails,
+      path,
+     });
 
+     if(success) setEmails(updatedEmails);
+     closeAllModals();
   }
 
   const renderDialogContent = () => {
@@ -88,8 +96,14 @@ const ActionDropdown = ({ file }: { file: Models.Document }) => {
               onChange={(e) => setName(e.target.value)}
             />
           )}
-          {value === "details" && <FileDetails file={file} />}
-          {value === "share" && <ShareInput file={file} onInputChange={setEmails} onRemove={handleRemoverUser} />}
+          {value === "details" && (<FileDetails file={file} />)}
+          {value === "share" && (<ShareInput file={file} onInputChange={setEmails} onRemove={handleRemoverUser} />)}
+          {value === "delete" && (
+            <p className="text-center text-light-100 font-medium">
+              Are you sure, You want to delete{` `}
+              <span className="font-semibold text-red2">{file.name}</span>?
+            </p>
+          )}
         </DialogHeader>
         {["rename", "share", "delete"].includes(value) && (
           <DialogFooter className="flex pt-2 flex-col gap-3 md:flex-row">
@@ -130,7 +144,7 @@ const ActionDropdown = ({ file }: { file: Models.Document }) => {
             height={25}
           />
         </DropdownMenuTrigger>
-        <DropdownMenuContent className="rounded-2xl">
+        <DropdownMenuContent className="rounded-2xl flex-1">
           <DropdownMenuLabel className="max-w-[200px] truncate">
             {file.name}
           </DropdownMenuLabel>

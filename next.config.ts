@@ -7,6 +7,7 @@ const nextConfig: NextConfig = {
     },
   },
   images: {
+    domains: ["cloud.appwrite.io", "img.freepik.com"],
     remotePatterns: [
       {
         protocol: "https",
@@ -17,6 +18,7 @@ const nextConfig: NextConfig = {
         hostname: "cloud.appwrite.io"
       },
     ],
+    unoptimized: true,
   },
 };
 
