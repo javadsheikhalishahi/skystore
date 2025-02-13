@@ -1,9 +1,16 @@
-export default function Home() {
+import { getFiles, getTotalSpaceUsed } from '@/lib/actions/file.action';
+
+const Dashboard = async () => {
+  const [files, totalSpace] = await Promise.all([
+    getFiles({ types: [], limit: 10 }),
+    getTotalSpaceUsed(),
+  ]);
+  
   return (
-    <div className="center">
-      <h1 className="h1">
-        SkyStore - Your ultimate storage solution.
-      </h1>
+    <div>
+      
     </div>
-  );
+  )
 }
+
+export default Dashboard
