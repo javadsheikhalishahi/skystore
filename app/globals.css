@@ -107,7 +107,7 @@
          hover:bg-blue/30 duration-300 !important;
 }
 .main-content {
-  @apply remove-scrollbar h-full flex-1 overflow-auto bg-blue/20 px-5 py-7 sm:mr-7 sm:rounded-[30px] md:mb-7 md:px-9 md:py-10 !important;
+  @apply remove-scrollbar h-full flex-1 overflow-auto bg-light-400 px-5 py-7 sm:mr-7 sm:rounded-[30px] md:mb-7 md:px-9 md:py-10 !important;
 }
 .sidebar {
   @apply remove-scrollbar  hidden h-screen w-[90px] flex-col overflow-auto px-5 py-7 sm:flex lg:w-[280px] lg:px-4 xl:w-[325px] !important;
@@ -278,6 +278,57 @@
 }
 .sort-content {
   @apply !shadow-drop-3 !important;
+}
+.container-dash {
+  @apply mx-auto grid max-w-7xl grid-cols-1 gap-6 md:grid-cols-2 xl:gap-10 !important;
+}
+.chart-dash {
+  @apply flex items-center rounded-[20px] bg-brand p-5 text-white md:flex-col xl:flex-row !important;
+}
+.chart-container-dash {
+  @apply mx-auto aspect-square w-[180px] text-white xl:w-[250px] !important;
+}
+.polar-grid {
+  @apply first:fill-white/20 last:fill-brand !important;
+}
+.chart-details {
+  @apply flex-1 items-start px-3 py-0 sm:px-5 lg:p-3 xl:pr-5 !important;
+}
+.chart-total-perc {
+  @apply fill-white text-4xl font-bold !important;
+}
+.chart-title {
+  @apply text-[20px] leading-[28px] font-bold md:text-center lg:text-left !important;
+}
+.chart-description {
+  @apply text-[16px] leading-[24px] font-medium mt-2 w-full text-white/70 md:text-center lg:text-left !important;
+}
+.summary-list-dash {
+  @apply mt-6 grid grid-cols-1 gap-4 xl:mt-10 xl:grid-cols-2 xl:gap-9 !important;
+}
+.summary-card-dash {
+  @apply relative mt-6 rounded-[20px] bg-white p-5 transition-all hover:scale-105 !important;
+}
+.summary-icon {
+  @apply absolute -left-3 top-[-25px] z-10 w-[190px] object-contain !important;
+}
+.summary-size {
+  @apply text-[18px] leading-[20px] font-medium relative z-20 w-full text-right !important;
+}
+.summary-title {
+  @apply text-[16px] leading-[24px] font-semibold relative z-20 text-center !important;
+}
+.recent-files-dash {
+  @apply h-full rounded-[20px] bg-white p-5 xl:p-8 !important;
+}
+.recent-file-details {
+  @apply flex w-full flex-col xl:flex-row xl:justify-between !important;
+}
+.recent-file-name {
+  @apply text-[14px] leading-[20px] font-semibold line-clamp-1 w-full text-light-100 sm:max-w-[200px] lg:max-w-[250px] !important;
+}
+.empty-list2 {
+  @apply text-[16px] leading-[24px] font-normal mt-10 text-center text-light-200 !important;
 }
 }
 
