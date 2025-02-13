@@ -15,14 +15,14 @@ interface Props {
 const Sidebar = ({ fullName, avatar, email }: Props) => {
     const pathname = usePathname();
   return (
-    <aside className="sidebar flex flex-col justify-between">
+    <aside className="sidebar flex flex-col justify-between ">
       <Link href="/">
         <Image
           src="/assets/icons/logo.png"
           alt="logo"
           width={120}
           height={50}
-          className="hidden lg:block h-auto"
+          className="hidden lg:block h-auto scale-150 relative left-10" 
         />
         <Image
           src="/assets/icons/logo.png"

@@ -22,7 +22,7 @@ const page = async ({ searchParams, params }: SearchParamProps) => {
             </p>
 
             <div className="container-sorts">
-                <p className="text-[16px] leading-[24px] font-normal hidden sm:block text-light-200">Sort by:</p>
+                <p className="text-[16px] leading-[24px] font-semibold hidden sm:block text-light-100">Sort by:</p>
                 <Sort />
             </div>
         </div>
