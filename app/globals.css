@@ -330,6 +330,7 @@
 .empty-list2 {
   @apply text-[16px] leading-[24px] font-normal mt-10 text-center text-light-200 !important;
 }
+
 }
 
 @layer base {

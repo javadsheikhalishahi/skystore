@@ -1,5 +1,5 @@
-
 import ActionDropdown from '@/components/ActionDropdown';
+import { CategoryChart } from '@/components/CategoryChart';
 import { Chart } from '@/components/Chart';
 import FormattedDateTime from '@/components/FormattedDateTime';
 import Thumbnail from '@/components/Thumbnail';
@@ -22,7 +22,7 @@ const Dashboard = async () => {
     <div className='container-dash'>
       <section>
         <Chart used={totalSpace.used} />
-
+        <CategoryChart usageSummary={usageSummary || []} />
         <ul className='summary-list-dash'>
           {usageSummary.map((summary) => (
             <Link 
