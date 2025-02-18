@@ -233,3 +233,50 @@ export const getUsageSummary = (totalSpace: any) => {
     },
   ]
 }
+
+export const groupFilesByDate = (files: any[], period = "day") => {
+  const grouped: { [key: string]: { [key: string]: number } } = {}; 
+
+  files.forEach((file) => {
+    const date = new Date(file.$createdAt);
+    let fileType = getFileType(file.name).type; 
+
+    // Merge video and audio into "media"
+    if (fileType === "video" || fileType === "audio") {
+      fileType = "media";
+    }
+
+    const key =
+      period === "day"
+        ? `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, "0")}-${String(date.getDate()).padStart(2, "0")}`
+        : `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, "0")}`;
+
+    if (!grouped[key]) {
+      grouped[key] = { image: 0, document: 0, media: 0, other: 0 }; 
+    }
+
+    grouped[key][fileType] = (grouped[key][fileType] || 0) + 1; 
+  });
+
+  return Object.entries(grouped).map(([date, types]) => ({
+    date,
+    image: types.image,
+    document: types.document,
+    media: types.media,
+    other: types.other,
+  }));
+};
+
+
+export const countFileTypes = (files: any[]) => {
+  const counts: { [key: string]: number } = {};
+
+  files.forEach((file) => {
+    const ext = file.extension || "other";
+    counts[ext] = (counts[ext] || 0) + 1;
+  });
+
+  return Object.entries(counts)
+    .map(([extension, count]) => ({ extension, count }))
+    .sort((a, b) => b.count - a.count);
+};

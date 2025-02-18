@@ -161,7 +161,7 @@
   @apply bg-transparent ring-2 rounded-full h-[52px] gap-2 px-10 shadow-drop-2 transition-all duration-1000 !important;
 }
 .preview-uploader-list {
-  @apply fixed bottom-10 right-10 z-50 flex size-full h-fit max-w-[480px] flex-col gap-3 rounded-[20px] bg-white p-7 shadow-drop-3 !important;
+  @apply fixed bottom-10 right-10 z-50 border-2 border-blue flex size-full h-fit max-w-[480px] flex-col gap-3 rounded-[20px] bg-light-300 p-7 shadow-drop-6 !important;
 }
 .preview-uploader-item {
   @apply flex items-center justify-between  gap-3 rounded-xl p-3 shadow-drop-3 !important;
@@ -282,6 +282,7 @@
 .container-dash {
   @apply mx-auto grid max-w-7xl grid-cols-1 gap-6 md:grid-cols-2 xl:gap-10 !important;
 }
+
 .chart-dash {
   @apply flex items-center rounded-[20px] bg-brand p-5 text-white md:flex-col xl:flex-row !important;
 }
@@ -310,7 +311,7 @@
   @apply relative mt-6 rounded-[20px] bg-white p-5 transition-all hover:scale-105 !important;
 }
 .summary-icon {
-  @apply absolute -left-3 top-[-25px] z-10 w-[190px] object-contain !important;
+  @apply absolute -left-3 top-[-25px] z-10 w-[190px] object-contain hover:animate-pulse !important;
 }
 .summary-size {
   @apply text-[18px] leading-[20px] font-medium relative z-20 w-full text-right !important;
@@ -319,18 +320,125 @@
   @apply text-[16px] leading-[24px] font-semibold relative z-20 text-center !important;
 }
 .recent-files-dash {
-  @apply h-full rounded-[20px] bg-white p-5 xl:p-8 !important;
+  @apply h-full rounded-[20px] bg-white p-5 xl:p-8 shadow-xl !important;
 }
+.quick-stats-panel {
+  @apply flex flex-col sm:flex-row sm:gap-5 mt-3 mb-6;
+}
+
+.stat-card {
+  @apply  bg-white p-5 shadow-xl rounded-lg w-full text-center transition-transform ease-in-out duration-300;
+}
+
+.stat-card:hover {
+  @apply scale-110 shadow-2xl;
+}
+
+.icon-wrapper {
+  @apply  flex justify-center items-center bg-blue p-2 rounded-full w-16 h-16 mx-auto mb-4;
+}
+.icon-wrapper:hover {
+  @apply  animate-spin;
+}
+
+.stat-icon {
+  @apply w-8 h-8  text-brand;
+}
+
+.quick-stats-panel h4 {
+  @apply text-sm  text-gray-500;
+}
+
+.quick-stats-panel p {
+  @apply font-semibold text-gray-800;
+}
+
 .recent-file-details {
-  @apply flex w-full flex-col xl:flex-row xl:justify-between !important;
+  @apply flex w-full flex-col gap-2  sm:flex-row sm:items-center sm:justify-between max-w-full overflow-hidden !important;
 }
+.recent-file-item {
+  @apply flex items-center justify-between gap-3 p-2 rounded-xl transition-all duration-500 cursor-pointer relative;
+}
+
+.recent-file-item:hover {
+  @apply bg-gray-200 scale-[1.05] shadow-2xl;
+}
+
 .recent-file-name {
   @apply text-[14px] leading-[20px] font-semibold line-clamp-1 w-full text-light-100 sm:max-w-[200px] lg:max-w-[250px] !important;
 }
 .empty-list2 {
-  @apply text-[16px] leading-[24px] font-normal mt-10 text-center text-light-200 !important;
+  @apply text-[16px] leading-[24px] font-normal mt-10 text-center text-gray-600 animate-bounce !important;
+}
+/* Container for the Upload Trend Chart */
+.chart-container {
+  padding: 16px;
+  margin-bottom: 20px;
 }
 
+/* Title for both the chart and leaderboard */
+.chart-container h2,
+.leaderboard-container h2 {
+  font-size: 18px;
+  font-weight: bold;
+  color: #333;
+  text-align: center;
+}
+
+/* Leaderboard Container */
+.leaderboard-container {
+  background: #ffffff;
+  padding: 16px;
+ 
+}
+
+/* Leaderboard List */
+.leaderboard-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* Individual Leaderboard Item */
+.leaderboard-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 12px;
+  border-bottom: 1px solid #ddd;
+  font-size: 16px;
+  font-weight: 500;
+  color: #444;
+  transition: background-color 0.3s, transform 0.3s;
+}
+
+/* Highlight the top file type */
+.leaderboard-item:first-child {
+  color: white;
+  font-weight: bold;
+  border-radius: 8px;
+}
+
+/* Last item shouldn't have a border */
+.leaderboard-item:last-child {
+  border-bottom: none;
+}
+@keyframes bounce {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-1px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+/* Apply bounce animation to the first item */
+.leaderboard-item.bounce {
+  animation: bounce 1s ease-in infinite;
+}
 }
 
 @layer base {

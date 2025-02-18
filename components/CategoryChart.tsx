@@ -22,8 +22,8 @@ const CATEGORY_COLORS: { [key: string]: string } = {
 
 export const CategoryChart = ({ usageSummary }: { usageSummary: any[] }) => {
   const [isClient, setIsClient] = useState(false);
-  const [data, setData] = useState<any[]>(usageSummary); 
-  const [selectedCategory, setSelectedCategory] = useState<string>("All"); 
+  const [data, setData] = useState<any[]>(usageSummary);
+  const [selectedCategory, setSelectedCategory] = useState<string>("All");
 
   useEffect(() => {
     setIsClient(true);
@@ -64,8 +64,8 @@ export const CategoryChart = ({ usageSummary }: { usageSummary: any[] }) => {
   return (
     <Card className="bg-white shadow-lg rounded-2xl p-2 mt-5 sm:p-4 border border-gray-300 transition-all hover:shadow-xl">
       <CardHeader className="text-center mt-0">
-        <CardTitle className="text-xl sm:text-2xl mb-4 font-bold text-gray-800 tracking-wide">
-          Storage Breakdown
+        <CardTitle className="text-xl sm:text-2xl mb-4 font-bold text-gray-800 ">
+           Storage Capacity Overview
         </CardTitle>
         <select
           value={selectedCategory}
@@ -81,21 +81,22 @@ export const CategoryChart = ({ usageSummary }: { usageSummary: any[] }) => {
       </CardHeader>
       <CardContent className="flex justify-center items-center relative">
         {allZero ? (
-          <p className="text-center text-lg text-gray-600">
+          <p className="text-center text-lg text-gray-600 animate-bounce">
             No data available for this category.
           </p>
         ) : (
           <>
             {/* Centered total usage text */}
-            <div className="absolute flex flex-col items-center top-40 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-sm  text-gray-800 font-semibold">
-  <p className="text-sm font-medium text-gray-700">Total Usage</p>
-  <p className="text-xl font-bold text-black mt-1 animate-pulse">{convertFileSize(totalUsage)}</p>
-  
-  <div className="my-1 w-12 border-t-2 border-gray-300" /> 
-  
-  <p className="text-xs text-gray-500 mt-1">2GB</p>
-</div>
+            <div className="absolute flex flex-col items-center justify-center self-center top-40 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-sm  text-gray-800 font-semibold">
+              <p className="text-sm font-medium text-gray-700">Total Usage</p>
+              <p className="text-xl font-bold text-black mt-1 animate-pulse">
+                {convertFileSize(totalUsage)}
+              </p>
 
+              <div className="my-0.5 w-12 border-t-2 border-gray-300" />
+
+              <p className="text-xs text-gray-500 mt-1">2GB</p>
+            </div>
 
             {/* Pie chart */}
             <ResponsiveContainer
@@ -140,19 +141,19 @@ export const CategoryChart = ({ usageSummary }: { usageSummary: any[] }) => {
                     outerRadius,
                     name,
                     payload,
-                    percent
+                    percent,
                   }) => {
                     if (window.innerWidth >= 640) {
                       const RADIAN = Math.PI / 180;
-                      const radius = outerRadius + 10; 
+                      const radius = outerRadius + 10;
                       const x = cx + radius * Math.cos(-midAngle * RADIAN);
                       const y = cy + radius * Math.sin(-midAngle * RADIAN);
                       return (
                         <text
                           x={x}
                           y={y}
-                          fill={payload.color} 
-                          textAnchor={x > cx ? "start" : "end"} 
+                          fill={payload.color}
+                          textAnchor={x > cx ? "start" : "end"}
                           dominantBaseline="central"
                           fontSize="13"
                           fontWeight="bold"
@@ -175,7 +176,7 @@ export const CategoryChart = ({ usageSummary }: { usageSummary: any[] }) => {
                       style={{
                         transformOrigin: "center",
                         transition: "all 0.8s ease",
-                      }} 
+                      }}
                     />
                   ))}
                 </Pie>

@@ -95,7 +95,7 @@ const FileUploader = ({ accountId, ownerId, className }: Props) => {
       </Button>
       {files.length > 0 && (
         <ul className="preview-uploader-list">
-          <h4 className="text-[18px] leading-[20px] font-medium text-light-200 motion-safe:animate-bounce">
+          <h4 className="text-[18px] leading-[20px] font-medium text-black motion-safe:animate-bounce">
             Uploading
           </h4>
 
