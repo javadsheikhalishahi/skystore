@@ -26,8 +26,11 @@ A **storage website** is an online cloud storage service that allows users to **
 - View analytics on file activity.
 - Upgrade storage plans as needed.
 
-## 👅 preview web
-   ![Website Preview](Your paragraph text.mp4)
+## 👅 Preview Web
+<video width="320" height="240" controls>
+  <source src="Your%20paragraph%20text.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
 
 ## 💽 Installation
 1. Clone the repository:
