@@ -9,10 +9,10 @@ A **storage website** is an online cloud storage service that allows users to **
 ### 📂 1. File Upload & Management
 - Upload and organize files easily.
 - Create folders for better file management.
-- Rename, move, and delete files.
+- Rename, details, and delete files.
 
 ### 🔒 2. User Authentication & Security
-- Secure login with password or OTP.
+- Secure login with OTP.
 - Encrypted file storage for data protection.
 - Role-based access control.
 
@@ -26,24 +26,8 @@ A **storage website** is an online cloud storage service that allows users to **
 - View analytics on file activity.
 - Upgrade storage plans as needed.
 
-## 👅 Adding an Image
-To display an image in the README:
-1. **Upload** your image (screenshot.png) to your GitHub repository.
-2. **Reference** it in the README using:
-   
-md
-   ![Website Preview](screenshot.png)
-
-3. If the image is in a folder, update the path:
-   
-md
-   ![Website Preview](assets/screenshot.png)
-
-4. Alternatively, use a direct URL:
-   
-md
-   ![Website Preview](https://raw.githubusercontent.com/your-username/repo/main/screenshot.png)
-
+## 👅 preview web
+   ![Website Preview](Your paragraph text.mp4)
 
 ## 💽 Installation
 1. Clone the repository:
