@@ -6,6 +6,10 @@ First, run the development server:
 
 ```bash
 npm run dev
+
+https://github.com/user-attachments/assets/1c1420c3-762d-4b7d-b57e-b4b1b3dd540b
+
+
 # or
 yarn dev
 # or
